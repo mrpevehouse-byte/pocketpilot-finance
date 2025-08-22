@@ -1,7 +1,7 @@
-/* PocketPilot Finance v1 - app.js (Updated Fix)
+/* PocketPilot Finance v1 - Full Fixed app.js
    - Investments appear immediately
-   - Refresh Market Data works reliably
-   - Alpha Vantage key handling improved
+   - Trend Tracker works reliably
+   - Stocks + Crypto fetch
 */
 
 const state = {
@@ -172,14 +172,10 @@ async function refreshMarketData(){
   // Trend Tracker
   const candidates=[];
   for(const [s,d] of Object.entries(stockData)){ candidates.push({symbol:s, type:'stock', mom:(d.latest-d.prev7)/d.prev7, latest:d.latest}); }
-  for(const [s,d] of Object.entries(cryptoData)){ candidates.push({symbol:s.toUpperCase(), type:'
-latest-d.prev7)/d.prev7});
-  }
+  for(const [s,d] of Object.entries(cryptoData)){ candidates.push({symbol:s.toUpperCase(), type:'crypto', mom:(d.latest-d.prev7)/d.prev7, latest:d.latest}); }
 
-  // Sort candidates by upward momentum
   candidates.sort((a,b)=> b.mom - a.mom);
 
-  // Display top 5
   const trendContainer = $('#trendResults');
   trendContainer.innerHTML = '';
   if(candidates.length===0){
