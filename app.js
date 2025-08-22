@@ -173,3 +173,25 @@ async function refreshMarketData(){
   const candidates=[];
   for(const [s,d] of Object.entries(stockData)){ candidates.push({symbol:s, type:'stock', mom:(d.latest-d.prev7)/d.prev7, latest:d.latest}); }
   for(const [s,d] of Object.entries(cryptoData)){ candidates.push({symbol:s.toUpperCase(), type:'
+latest-d.prev7)/d.prev7});
+  }
+
+  // Sort candidates by upward momentum
+  candidates.sort((a,b)=> b.mom - a.mom);
+
+  // Display top 5
+  const trendContainer = $('#trendResults');
+  trendContainer.innerHTML = '';
+  if(candidates.length===0){
+    trendContainer.innerHTML = '<div class="smallmuted">No market data available. Check API key or network.</div>';
+    return;
+  }
+
+  trendContainer.innerHTML = '<div class="smallmuted">Top trending investments (not financial advice):</div>';
+  candidates.slice(0,5).forEach(c=>{
+    const el=document.createElement('div'); el.className='item';
+    const pct = (c.mom*100).toFixed(2)+'%';
+    el.innerHTML=`<div>${c.symbol} (${c.type})</div><div>${c.latest.toFixed(2)} USD / 7-day change: ${pct}</div>`;
+    trendContainer.appendChild(el);
+  });
+}
