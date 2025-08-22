@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <title>PocketPilot Finance (v1)</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#0f172a">
+</head>
+<body>
+  <div id="app">
+    <header class="topbar">
+      <h1>PocketPilot Finance</h1>
+      <button id="installBtn" class="btn small">Install</button>
+    </header>
+
+    <main>
+      <section id="dashboard" class="card">
+        <h2>Dashboard</h2>
+        <div class="row">
+          <div class="card small">
+            <h3>Cash Flow</h3>
+            <p id="cashflow">$0</p>
+          </div>
+          <div class="card small">
+            <h3>Savings Goals</h3>
+            <p id="goalsummary">0 goals</p>
+          </div>
+          <div class="card small">
+            <h3>Investments</h3>
+            <p id="investsummary">$0</p>
+          </div>
+        </div>
+      </section>
+
+      <section id="transactions" class="card">
+        <h2>Transactions</h2>
+        <form id="txForm">
+          <select id="txType"><option value="expense">Expense</option><option value="income">Income</option></select>
+          <input id="txAmount" type="number" step="0.01" placeholder="Amount" required>
+          <input id="txCategory" placeholder="Category (e.g., Food)" required>
+          <input id="txDate" type="date" required>
+          <input id="txNote" placeholder="Note (optional)">
+          <button class="btn" type="submit">Add</button>
+        </form>
+        <div id="txList"></div>
+      </section>
+
+      <section id="budgets" class="card">
+        <h2>Budgets</h2>
+        <form id="budgetForm">
+          <input id="budgetCat" placeholder="Category" required>
+          <input id="budgetAmt" type="number" step="0.01" placeholder="Monthly Limit" required>
+          <button class="btn" type="submit">Add Budget</button>
+        </form>
+        <div id="budgetList"></div>
+      </section>
+
+      <section id="goals" class="card">
+        <h2>Savings Goals</h2>
+        <form id="goalForm">
+          <input id="goalName" placeholder="Goal name" required>
+          <input id="goalTarget" type="number" step="0.01" placeholder="Target amount" required>
+          <button class="btn" type="submit">Create Goal</button>
+        </form>
+        <div id="goalList"></div>
+      </section>
+
+      <section id="investments" class="card">
+        <h2>Investments</h2>
+        <form id="invForm">
+          <input id="invSymbol" placeholder="Ticker (e.g., AAPL or BTC)" required>
+          <input id="invShares" type="number" step="0.0001" placeholder="Shares / Units" required>
+          <select id="invType"><option value="stock">Stock</option><option value="crypto">Crypto</option></select>
+          <button class="btn" type="submit">Add Investment</button>
+        </form>
+        <div id="invList"></div>
+      </section>
+
+      <section id="trend" class="card">
+        <h2>AI Trend Tracker</h2>
+        <p class="disclaimer"><strong>Not financial advice.</strong> Automated insights for educational purposes only.</p>
+        <div id="trendSettings" class="settings">
+          <label>Alpha Vantage API Key (stocks): <input id="avKey" placeholder="paste key here"></label>
+          <button id="saveKey" class="btn small">Save Key</button>
+          <button id="refreshData" class="btn small">Refresh Market Data</button>
+        </div>
+        <div id="trendResults"></div>
+      </section>
+
+      <section class="card">
+        <h2>Settings & Export</h2>
+        <button id="exportBtn" class="btn">Export Data (JSON)</button>
+        <button id="clearBtn" class="btn danger">Clear All Data</button>
+      </section>
+
+    </main>
+
+    <footer>
+      <small>PocketPilot Finance — Private on-device PWA. v1</small>
+    </footer>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
