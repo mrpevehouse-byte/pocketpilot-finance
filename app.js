@@ -1,4 +1,4 @@
- /* PocketPilot Finance v1 - app.js (Updated Fix)
+/* PocketPilot Finance v1 - app.js (Updated Fix)
    - Investments appear immediately
    - Refresh Market Data works reliably
    - Alpha Vantage key handling improved
